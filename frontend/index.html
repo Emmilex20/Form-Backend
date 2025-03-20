@@ -56,15 +56,17 @@
   <script>
     document.getElementById("registrationForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-
+  
       const formData = new FormData(e.target);
-
+  
       try {
-        const response = await fetch("http://localhost:3000/submit-form", {
+        const API_URL = "https://form-server-6azh.onrender.com"; // Your Render backend URL
+  
+        const response = await fetch(`${API_URL}/submit-form`, {
           method: "POST",
           body: formData,
         });
-
+  
         if (response.ok) {
           alert("Form submitted successfully!");
         } else {
@@ -76,5 +78,6 @@
       }
     });
   </script>
+  
 </body>
 </html>
