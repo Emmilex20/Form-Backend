@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Registration Form</h1>
+    <p>Please fill out this form with the required information</p>
+  </header>
+
+  <!-- Registration Form -->
+  <form id="registrationForm">
+    <fieldset>
+      <label for="first-name">First Name: <input id="first-name" name="firstName" type="text" required></label>
+      <label for="last-name">Last Name: <input id="last-name" name="lastName" type="text" required></label>
+      <label for="email">Email: <input id="email" name="email" type="email" required></label>
+      <label for="new-password">Create Password: <input id="new-password" name="password" type="password" required></label>
+    </fieldset>
+    <fieldset>
+      <legend>Account Type</legend>
+      <label><input type="radio" name="accountType" value="Personal" checked> Personal</label>
+      <label><input type="radio" name="accountType" value="Business"> Business</label>
+    </fieldset>
+    <fieldset>
+      <label for="profile-picture">Upload Profile Picture: <input id="profile-picture" type="file" name="file"></label>
+      <label for="age">Age: <input id="age" type="number" name="age" min="13" max="120"></label>
+      <label for="referrer">How did you hear about us?
+        <select id="referrer" name="referrer">
+          <option value="">(select one)</option>
+          <option value="Newspaper">Newspaper</option>
+          <option value="Facebook">Facebook</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Others">Others</option>
+        </select>
+      </label>
+      <label for="bio">Bio:
+        <textarea id="bio" name="bio" rows="3"></textarea>
+      </label>
+    </fieldset>
+    <label>
+      <input type="checkbox" required> I accept the <a href="#">terms and conditions</a>
+    </label>
+    <input type="submit" value="Submit">
+  </form>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EmmyTech. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+  </footer>
+
+  <script>
+    document.getElementById("registrationForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+
+      try {
+        const response = await fetch("http://localhost:3000/submit-form", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (response.ok) {
+          alert("Form submitted successfully!");
+        } else {
+          alert("Error submitting form.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while submitting the form.");
+      }
+    });
+  </script>
+</body>
+</html>
